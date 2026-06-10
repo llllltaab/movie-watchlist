@@ -9,12 +9,9 @@ const clearWatchBtn = document.getElementById("clear-watched-btn");
 const filterBtns = [...document.querySelectorAll(".filter-btn")];
 
 
-console.log(appTitle);
-console.log(movieCount);
-console.log(movieForm)
-console.log(movieForm)
-console.log(titleInput)
-console.log(genreInput)
-console.log(movieList)
-console.log(clearWatchBtn)
-console.log(filterBtns)
+titleInput.getAttribute("value")  // → null (the HTML never had a value attribute)
+titleInput.value                  // → whatever you just typed
+
+// What is the difference between getAttribute("value") and .value on an input?
+// getAttribute("value") → gets the value from the HTML attribute, if it exists
+// .value → gets the current live value inside the input, including what the user typed
