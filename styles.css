@@ -1,0 +1,133 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f4f9;
+  color: #1a1a2e;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #1a1a2e;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0 0 5px;
+}
+
+header p {
+  margin: 0;
+  opacity: 0.8;
+}
+
+main {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+#movie-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#movie-form input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+#movie-form button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #1a1a2e;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#movie-form button:hover {
+  background-color: #33334d;
+}
+
+#filter-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-btn,
+#clear-watched-btn {
+  padding: 8px 14px;
+  border: 1px solid #1a1a2e;
+  border-radius: 4px;
+  background-color: white;
+  color: #1a1a2e;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.filter-btn:hover,
+#clear-watched-btn:hover {
+  background-color: #e0e0eb;
+}
+
+#clear-watched-btn {
+  margin-left: auto;
+  border-color: #b00020;
+  color: #b00020;
+}
+
+#clear-watched-btn:hover {
+  background-color: #fbe4e8;
+}
+
+#movie-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#movie-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+/* Applied to the <li> when a movie is marked watched */
+.watched {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
+/* Applied to whichever filter button is currently active */
+.active-filter {
+  background-color: #1a1a2e;
+  color: white;
+}
+
+/* Applied to cards that don't match the current filter — hides them */
+.filtered-out {
+  display: none;
+}
