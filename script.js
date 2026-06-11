@@ -8,6 +8,8 @@ const clearWatchBtn = document.getElementById("clear-watched-btn");
 
 const filterBtns = [...document.querySelectorAll(".filter-btn")];
 
+let currentFilter = "all";
+
 
 titleInput.getAttribute("value")  // → null (the HTML never had a value attribute)
 titleInput.value                  // → whatever you just typed
@@ -67,6 +69,8 @@ movieForm.addEventListener("submit", (e) => {
     const movieCard = createMovieCard(title, genre);
     movieList.appendChild(movieCard);
 
+    updateCount();
+
     movieForm.reset();
 });
 
@@ -87,8 +91,8 @@ movieList.addEventListener("click", (event) => {
 
     if (event.target.classList.contains("remove-btn")) {
         card.remove();
-        // TODO: call updateCount() here
-        // TODO: call applyFilter(currentFilter) here
+        updateCount();
+        applyFilter(currentFilter);
     }
 
     if (event.target.classList.contains("watch-btn")) {
@@ -100,8 +104,62 @@ movieList.addEventListener("click", (event) => {
             event.target.textContent = "Mark Watched";
         }
 
-        // TODO: call applyFilter(currentFilter) here
+        applyFilter(currentFilter);
     }
+});
+
+function updateCount() {
+    const count = movieList.querySelectorAll(".movie-card").length;
+    movieCount.textContent = count === 1 ? "1 movie" : `${count} movies`;
+}
+
+function updateFilterButtons(activeFilter) {
+    filterBtns.forEach((btn) => {
+        btn.classList.remove("active-filter");
+        if (btn.id === "filter-" + activeFilter) {
+            btn.classList.add("active-filter");
+        }
+    });
+}
+
+function applyFilter(filter) {
+    currentFilter = filter;
+    updateFilterButtons(filter);
+
+    const cards = movieList.querySelectorAll(".movie-card");
+
+    cards.forEach((card) => {
+        if (filter === "all") {
+            card.classList.remove("filtered-out");
+        } else if (filter === "watched") {
+            if (card.classList.contains("watched")) {
+                card.classList.remove("filtered-out");
+            } else {
+                card.classList.add("filtered-out");
+            }
+        } else if (filter === "unwatched") {
+            if (!card.classList.contains("watched")) {
+                card.classList.remove("filtered-out");
+            } else {
+                card.classList.add("filtered-out");
+            }
+        }
+    });
+}
+
+filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+        const filter = btn.id.replace("filter-", "");
+        applyFilter(filter);
+    });
+});
+
+clearWatchBtn.addEventListener("click", () => {
+    const watchedCards = movieList.querySelectorAll(".watched");
+    watchedCards.forEach((card) => card.remove());
+
+    updateCount();
+    applyFilter(currentFilter);
 });
 
 
